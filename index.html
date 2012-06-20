@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>{{ name|escape }}</title>
+  <meta content="width=320" name="viewport" />
+</head>
+<body>
+<h1>{{ name|escape }}</h1>
+  <div class="description">
+    <p>{{ description|escape }}</p>
+  </div>
+  <div class="auth">
+    <a id="auth" href="{{ auth_url }}">
+      <img src="img/connect-white.png" />
+    </a>
+  </div>
+  <div class="authed" style="display: none;">
+    All set
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+  <script type="text/javascript">
+    client_id = "{{ client_id }}";
+    $.getJSON('/isAuthd?client_id=' + client_id,
+              function(config) {
+                if (config) {
+                  $('div.auth').hide();
+                  $('div.authed').show();
+                }
+              });
+  </script>
+</body>
+</html>
