@@ -34,4 +34,4 @@ CONFIG = {
 # Replace 'None' with the class object of your app. It must inherit from the
 # provided AbstractApp class.
 # import  YOUR_CLASS_HERE
-CHECKIN_CLASS = None
+APP_CLASS = None
