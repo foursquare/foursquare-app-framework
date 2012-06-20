@@ -13,7 +13,7 @@ from model import UserToken, ContentInfo
 import utils
 
 
-class Plugin(webapp.RequestHandler):
+class AbstractApp(webapp.RequestHandler):
   def get(self):
     client = utils.makeFoursquareClient()
 
@@ -25,7 +25,7 @@ class Plugin(webapp.RequestHandler):
         return
       return self.contentGet(client, content_info)
 
-    return self.pluginGet(client)
+    return self.appGet(client)
 
 
   def post(self):
@@ -42,12 +42,12 @@ class Plugin(webapp.RequestHandler):
       return self.checkinTaskQueue(client, checkin_json)
 
     client = utils.makeFoursquareClient()
-    return self.pluginPost(client)
+    return self.appPost(client)
 
 
-  def pluginGet(self, client):
+  def appGet(self, client):
     """Generic handler for GET requests"""
-    logging.warning('pluginGet stub called')
+    logging.warning('appGet stub called')
     self.error(404)
     return
 
@@ -63,9 +63,9 @@ class Plugin(webapp.RequestHandler):
     return
 
 
-  def pluginPost(self, client):
+  def appPost(self, client):
     """Generic handler for POST requests"""
-    logging.warning('pluginPost stub called')
+    logging.warning('appPost stub called')
     self.error(404)
     return
 

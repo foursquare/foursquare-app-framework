@@ -9,8 +9,10 @@ import time
 try: import simplejson as json
 except ImportError: import json
 
-from config import CONFIG, PLUGIN_CLASS
 from foursquare import InvalidAuth
+
+from config import CONFIG, APP_CLASS
+from foursquare_secrets import SECRETS
 from model import UserSession, UserToken
 import utils
 
@@ -56,7 +58,6 @@ class OAuth(webapp.RequestHandler):
     self.redirect(CONFIG['post_auth_confirmation_uri'])
 
 
-
 class IsAuthd(webapp.RequestHandler):
   """Returns whether or not a user has connected their foursquare account"""
   def get(self):
@@ -77,14 +78,15 @@ class ProcessCheckin(webapp.RequestHandler):
   PREFIX = "/checkin"
 
   def post(self):
-    # TODO: CHECK PUSH SECRET IF NOT IN LOCAL_DEV MODE
-    logging.error("checkin json str: " + self.request.get('checkin'))
+    # Validate against our push secret if we're not in local_dev mode.
+    if (self.request.get('secret') != SECRETS['push_secret'] and not CONFIG['local_dev']):
+      self.error = 403
+      return
     checkin_json = json.loads(self.request.get('checkin'),
                               parse_float=str)
     if 'venue' not in checkin_json:
       # stupid shouts. skip everything
       return
-
     logging.debug('received checkin ' + checkin_json['id'])
     taskqueue.add(url='/_checkin',
                   params={'checkin': self.request.get('checkin')})
@@ -106,8 +108,8 @@ application = webapp.WSGIApplication([('/oauth.*', OAuth),
                                       ('/checkin', ProcessCheckin),
                                       ('/isAuthd', IsAuthd),
                                       ('/', HomePage),
-                                      ('/_checkin', PLUGIN_CLASS),
-                                      ('/.*', PLUGIN_CLASS)],
+                                      ('/_checkin', APP_CLASS),
+                                      ('/.*', APP_CLASS)],
                                      debug=CONFIG['debug'])
 
 def main():

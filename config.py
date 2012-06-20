@@ -1,3 +1,6 @@
+# Don't import anything that imports CONFIG here, the circular dependency will not work.
+# Instead, import after the definition of CONFIG.
+
 CONFIG = {
   # foursquare server to use. You probably don't need to change this.
   'foursquare_server':'https://foursquare.com',
@@ -28,8 +31,7 @@ CONFIG = {
   # Feel free to add new config parameters here...
 }
 
-# Replace 'None' with the class object of your plugin. It must inherit from the
-# provided Plugin class.
-# NOTE: You'll need to import your plug-in class down here, below the definition of CONFIG, if you
-# want to use CONFIG inside your plugin class.
-PLUGIN_CLASS = None
+# Replace 'None' with the class object of your app. It must inherit from the
+# provided AbstractApp class.
+# import  YOUR_CLASS_HERE
+CHECKIN_CLASS = None
