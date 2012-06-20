@@ -4,8 +4,9 @@ runtime: python27
 api_version: 1
 threadsafe: false
 
-builtins:
-- appstats: on
+## Uncomment to enable App Engine appstats
+# builtins:
+# - appstats: on
 
 handlers:
 

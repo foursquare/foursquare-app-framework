@@ -40,6 +40,7 @@ class UserToken(db.Model):
     return None
 
 class ContentInfo(db.Model):
+  """Generic object for easily storing content for a reply or post."""
   content_id = db.StringProperty()
   checkin_id = db.StringProperty()
   venue_id = db.StringProperty()
