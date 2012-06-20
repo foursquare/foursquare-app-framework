@@ -4,13 +4,9 @@ CONFIG = {
   # The server name for local_dev mode. Make sure the port matches what you use.
   'local_server': 'http://localhost:8080',
   # Server name for your deployed AppEngine instance
-  'prod_server': ''
+  'prod_server': None,
   # OAuth client ID. Must match what you set at https://foursquare.com/oauth.
-  'client_id': '',
-  # OAuth client secret. Must match what you set at https://foursquare.com/oauth.
-  'client_secret': '',
-  # Foursquare push API secret. Must match what you set at https://foursquare.com/oauth.
-  'push_secret': '',
+  'client_id': None,
   # OAuth callback/redirect URI. Must match what you set at https://foursquare.com/oauth.
   'redirect_uri': '%s/oauth', # (server)
   # Format string to serve URL content out of. Not necessarily required.
@@ -34,6 +30,6 @@ CONFIG = {
 
 # Replace 'None' with the class object of your plugin. It must inherit from the
 # provided Plugin class.
-# NOTE: You'll need to import your plug-in class doen here, below the definition of CONFIG, if you
+# NOTE: You'll need to import your plug-in class down here, below the definition of CONFIG, if you
 # want to use CONFIG inside your plugin class.
 PLUGIN_CLASS = None

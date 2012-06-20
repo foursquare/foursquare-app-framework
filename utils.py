@@ -7,7 +7,8 @@ except ImportError: import json
 import foursquare
 
 from config import CONFIG
-
+# Does this import fail for you? Fill out foursquare_secrets_template.py, and move it to foursquare_secrets.
+from foursquare_secrets import SECRETS
 
 def getServer():
   if CONFIG['local_dev']:
@@ -33,7 +34,7 @@ def generateFoursquareAuthUri(client_id):
 def makeFoursquareClient(access_token=None):
   redirect_uri = generateRedirectUri()
   return foursquare.Foursquare(client_id = CONFIG['client_id'],
-                               client_secret = CONFIG['client_secret'],
+                               client_secret = SECRETS['client_secret'],
                                access_token = access_token,
                                redirect_uri = redirect_uri,
                                version = CONFIG['api_version'])

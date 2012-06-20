@@ -1,3 +1,9 @@
+# IMPORTANT! This ignore makes sure you don't check-in
+# your foursquare client/push secrets. Don't remove this
+# unless you're sure that you won't leak these secrets by
+# open-sourcing this code, etc.
+foursquare_secrets.py
+
 *.py[co]
 
 # Packages
