@@ -15,7 +15,7 @@ CONFIG = {
   # Format string to serve URL content out of. Not necessarily required.
   'content_uri': '%s/content?content_id=%s', # (server, content_id)
   # The foursquare API version string to pass. See: https://developer.foursquare.com/overview/versioning
-  'api_version': '20120201',
+  'api_version': '20120608',
   # A name for the hompage and titles.
   'site_name': '',
   # A description for the home page
