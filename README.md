@@ -90,7 +90,7 @@ to find your auth token in the datastore.
 
 Once you've done that, you can push the data into your app via:
 
-    curl http://localhost:8080/checkin --data @test/test_checkin.txt
+    curl http://localhost:8090/checkin --data-urlencode checkin@test_checkin.txt
 
 
 You probably don't want to make actual write requests from the app when in
