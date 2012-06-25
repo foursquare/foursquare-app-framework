@@ -1,0 +1,21 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <title>Menulette</title>
+  <meta content="width=320" name="viewport" />
+</head>
+<body>
+<h1>Menulette</h1>
+  <div>
+    <p>How was the {{item|escape}}?</p>
+    <div class="form">
+      <form action="/menulette" method="post">
+        <input type="hidden" name="source_content_id" value="{{content_id}}" />
+        <input type="hidden" name="fsqCallback" value="{{fsqCallback}}" />
+        <input type="submit" name="amazing" value="Amazing!" />
+        <input type="submit" name="death" value="Death" />
+      </form>
+    </div>
+  </div>
+</body>
+</html>
