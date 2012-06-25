@@ -20,7 +20,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
   <script type="text/javascript">
     client_id = "{{ client_id }}";
-    $.getJSON('/isAuthd?client_id=' + client_id,
+    $.getJSON('/isAuthd',
               function(config) {
                 if (config) {
                   $('div.auth').hide();
