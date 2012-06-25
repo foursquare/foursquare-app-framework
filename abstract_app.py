@@ -1,12 +1,8 @@
 import logging
-import os
 try: import simplejson as json
 except ImportError: import json
-import string
 
 from google.appengine.ext import webapp
-from google.appengine.ext.webapp import template
-
 
 from config import CONFIG
 from model import UserToken, ContentInfo

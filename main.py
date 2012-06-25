@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-import cgi
 import Cookie
 import email.utils
 import logging
