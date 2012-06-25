@@ -37,3 +37,4 @@ pip-log.txt
 
 #Eclipse junk
 .project
+.pydevproject
