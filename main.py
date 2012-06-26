@@ -20,21 +20,45 @@ from google.appengine.ext import webapp
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.ext.webapp import template
 
+class OAuthConnectErrorException(Exception):
+  pass
+
+class OAuthConnectDeniedException(Exception):
+  pass
+
+
 class OAuth(webapp.RequestHandler):
   """Handle the OAuth redirect back to the service."""
   def post(self):
     self.get()
 
   def get(self):
-    code = self.request.get('code')
-    assert code, "No code, bailing"
+    try:
+      error = self.request.get('error')
+      if error == "access_denied":
+        raise OAuthConnectDeniedException
+      elif error:
+        raise OAuthConnectErrorException
 
-    client = utils.makeFoursquareClient()
-    access_token = client.oauth.get_token(code)
-    assert access_token, "Failed to get access_token from foursquare."
-    client.set_access_token(access_token)
+      code = self.request.get('code')
+      if not code:
+        raise ConnectException
+
+      client = utils.makeFoursquareClient()
+      access_token = client.oauth.get_token(code)
+      if not access_token:
+        raise ConnectException
+      client.set_access_token(access_token)
+    except OAuthConnectDeniedException:
+      self.redirect(CONFIG['auth_denied_uri'])
+      return
+    except OAuthConnectErrorException:
+      path = os.path.join(os.path.dirname(__file__),
+                          'templates/connect_error.html')
+      self.response.out.write(template.render(path, {'name': CONFIG['site_name']}))
+      return
+
     user = client.users()  # returns the auth'd users info
-
     fs_user_id = user['user']['id']
 
     existing_token = UserToken.get_by_fs_id(fs_user_id)
