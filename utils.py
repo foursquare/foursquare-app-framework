@@ -1,6 +1,7 @@
-import urllib
-import string
+import itertools
 import random
+import string
+import urllib
 try: import simplejson as json
 except ImportError: import json
 
@@ -50,3 +51,12 @@ def fetchJson(url):
   result = urllib.urlopen(url).read()
 #  logging.info('got back: ' + result)
   return json.loads(result)
+
+def isMobileUserAgent(user_agent):
+  """Returns True if the argument is a User-Agent string for a mobile device.
+
+  Includes iPhone, iPad, Android, and BlackBerry.
+  """
+  # Split on spaces and "/"s in user agent.
+  tokens = itertools.chain.from_iterable([item.split("/") for item in user_agent.split()])
+  return "Mobile" in tokens

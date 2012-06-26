@@ -25,8 +25,9 @@ CONFIG = {
   'local_dev': True,
   # AppEngine debug mode
   'debug': True,
-  # This can either be a path (on this server), or an external URI
-  'post_auth_confirmation_uri': '/',
+  # Thesse can either be a path (on this server), or an external URI
+  'auth_success_uri_desktop': '/',
+  'auth_success_uri_mobile': '/',
   # Application Level Configuration
   # Feel free to add new config parameters here...
 }

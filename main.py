@@ -54,7 +54,9 @@ class OAuth(webapp.RequestHandler):
     cookie['session']['path'] = '/'
     cookie['session']['expires'] = email.utils.formatdate(time.time() + (14 * 86400), localtime=False, usegmt=True)
     self.response.headers.add_header("Set-Cookie", cookie.output()[12:])
-    self.redirect(CONFIG['post_auth_confirmation_uri'])
+    isMobile = utils.isMobileUserAgent(self.request.headers['User-Agent'])
+    redirect_uri = CONFIG['auth_success_uri_mobile'] if isMobile else CONFIG['auth_success_uri_desktop']
+    self.redirect(redirect_uri)
 
 
 class IsAuthd(webapp.RequestHandler):
