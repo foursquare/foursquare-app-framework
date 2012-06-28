@@ -47,7 +47,7 @@ class OAuth(webapp.RequestHandler):
       client = utils.makeFoursquareClient()
       access_token = client.oauth.get_token(code)
       if not access_token:
-        raise ConnectException
+        raise OAuthConnectErrorException
       client.set_access_token(access_token)
     except OAuthConnectDeniedException:
       self.redirect(CONFIG['auth_denied_uri'])
