@@ -42,7 +42,7 @@ class OAuth(webapp.RequestHandler):
 
       code = self.request.get('code')
       if not code:
-        raise ConnectException
+        raise OAuthConnectErrorException
 
       client = utils.makeFoursquareClient()
       access_token = client.oauth.get_token(code)
